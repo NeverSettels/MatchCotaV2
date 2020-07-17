@@ -6,8 +6,10 @@
 This app will provide a space for people looking for a new pet to match with people giving up pets for adoption. 
 
 ## Developers Note:
-**It is important to note that pet adoption is not something to do on a whim. It is a responsability you're agreeing to for the rest of the pets life. You will be their safety and calm in this world and if you are unable or unwilling to to accept this responsibility but still choose to adopt here is a helpful [link](https://www.amishrakefight.org/gfy/). Animals are living beings act accordingly**
+**It is important to note that pet adoption is not something to do on a whim. It is a responsability you're agreeing to for the rest of the pets life. You will be their safety and calm in this world and if you are unable or unwilling to to accept this responsibility DO NOT ADOPT. Animals are living beings act accordingly**
 
+
+### _**[Responsibe Pet Adoption](https://www.petmd.com/dog/care/ultimate-guide-responsible-pet-adoption)**_
 
 
 
