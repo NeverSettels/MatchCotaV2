@@ -33,7 +33,6 @@ export default function Landing() {
             <label for="accept"> <strong>I understand that adopting a pet comes with inmense responsibility </strong> </label>
           </>}
       </div>
-
     </div>
   )
 }
