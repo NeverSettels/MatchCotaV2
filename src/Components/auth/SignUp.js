@@ -20,7 +20,7 @@ export default function Header() {
         console.log("do i get anything here=>>> ", data.user.uid)
 
         message.success("successfully signed up!");
-
+        // how create two collections at once
         return firestore.collection('users').add({ userId: data.user.uid, role, liked: [] })
       }).catch(function (error) {
         message.error(error.message);
@@ -45,7 +45,7 @@ export default function Header() {
           <option value="Role1">Role1</option>
           <option value="Role2">Role2</option>
         </select>
-
+        <button onClick={doSignUp}>Sign up</button>
       </form>
 
 
