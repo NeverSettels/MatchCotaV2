@@ -7,7 +7,7 @@ export default function Landing() {
     <div className="landing">
       <div className="adoption blurb">
         <h2>Before Sign Up</h2>
-        <p> It is important to note that pet adoption is not something to do on a whim. It is a responsability you're agreeing to for the rest of the pets life. You will be their safety and calm in this world and if you are unable or unwilling to to accept this responsibility DO NOT ADOPT. Animals are living beings act accordingly. If your considering becoming a pet parent for the first time take the time to read though some of the links provided below.</p>
+        <p> It is important to note that pet adoption is not something to do on a whim. It is a responsability you're agreeing to for the rest of the pets life. You will be their safety and calm in this world and if you are unable or unwilling to to accept this responsibility <strong>DO NOT ADOPT</strong>. Animals are living beings act accordingly. If your considering becoming a pet parent for the first time take the time to read though some of the links provided below.</p>
 
         <ul>
           <li><a href="https://www.petmd.com/dog/care/ultimate-guide-responsible-pet-adoption"> The ultimate guide responsible pet adoption</a></li>
@@ -18,7 +18,7 @@ export default function Landing() {
         {displaySignUp ? <Link to="/signup"><button>Sign Up</button></Link> :
           <>
             <input onChange={() => setdisplaySignUp(true)} type="checkbox" id="accept" name="accept" />
-            <label for="accept"> I understand that Adopting a pet comes with inmense responsibility</label>
+            <label for="accept"> <strong>I understand that adopting a pet comes with inmense responsibility </strong> </label>
           </>}
       </div>
 
