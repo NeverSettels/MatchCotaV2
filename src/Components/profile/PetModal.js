@@ -11,14 +11,20 @@ export default function PetModal() {
     const [age, setage] =  useState('0-1')
     const [size, setSize] = useState('very small')
     const [gender, setgender] = useState('female')
-
     const [attributes, setattributes] = useState([])
+    const [personality, setpersonality] = useState([])
+    const [training, settraining] = useState([])
+    const [steralized, setsteralized] = useState(false);
+    const [medicalNeeds, setmedicalNeeds] = useState(false);
+    const [medicalNeedsdesc, setmedicalNeedsdesc] = useState("NA")
+
+
     const handleOk = () => {
         let tempPetType =petType;
         if(petType==='other'){
             tempPetType = otherType;
         }
-        let petObj = {location,petName, pettype:tempPetType ,age, size, gender, attributes};
+        let petObj = {location,petName, pettype:tempPetType ,age, size, gender, attributes, personality, steralized, medicalNeeds,medicalNeedsdesc};
         console.log(petObj)
        setvisible(false)
       };
@@ -33,6 +39,26 @@ export default function PetModal() {
             setattributes([...temp])
           }
       }
+      const addPersonality=(e)=>{
+        let temp = [...personality]
+        if(e.target.checked){
+            setpersonality([...temp, e.target.value])
+        }else{
+         let removeIndex = personality.indexOf(e.target.value)
+          temp.splice(removeIndex,1)
+          setpersonality([...temp])
+        }
+    }
+    const addTraining=(e)=>{
+        let temp = [...training]
+        if(e.target.checked){
+            settraining([...temp, e.target.value])
+        }else{
+         let removeIndex = training.indexOf(e.target.value)
+          temp.splice(removeIndex,1)
+          settraining([...temp])
+        }
+    }
     return (
         <>
         <Button type="primary" onClick={()=>setvisible(true)}>
@@ -143,43 +169,43 @@ export default function PetModal() {
                 <h5>
                 <p>Personality</p>
                 </h5>
-                Needs lots of attention: <input type="checkbox" name="attributes[]" value="Needs lots of attention" /><br />
-                Is independent: <input type="checkbox" name="attributes[]" value="Is independent" /><br />
-                Is confident: <input type="checkbox" name="attributes[]" value="Is confident" /><br />
-                Is shy or nervous: <input type="checkbox" name="attributes[]" value="Is shy or nervous" /><br />
-                Is playful: <input type="checkbox" name="attributes[]" value="Is playful" /><br />
-                Is relaxed: <input type="checkbox" name="attributes[]" value="Is relaxed" /><br />
-                Is protective: <input type="checkbox" name="attributes[]" value="Is protective" /><br />
-                Is quiet: <input type="checkbox" name="attributes[]" value="Is quiet" /><br />
-                Makes some noise: <input type="checkbox" name="attributes[]" value="Makes some noise" /><br />
-                Is noisy: <input type="checkbox" name="attributes[]" value="Is noisy" /><br />
-                Is great with kids: <input type="checkbox" name="attributes[]" value="Is great with kids" /><br />
-                Is not great with kids: <input type="checkbox" name="attributes[]" value="Is not great with kids" /><br />
-                Is great with other pets: <input type="checkbox" name="attributes[]" value="Is great with other pets" /><br />
-                Is not great with other pets: <input type="checkbox" name="attributes[]"
-                value="Is not great with other pets" /><br />
+                Needs lots of attention: <input type="checkbox"onChange={e=>addPersonality(e)} value="Needs lots of attention" /><br />
+                Is independent: <input type="checkbox" onChange={e=>addPersonality(e)} value="Is independent" /><br />
+                Is confident: <input type="checkbox" onChange={e=>addPersonality(e)} value="Is confident" /><br />
+                Is shy or nervous: <input type="checkbox" onChange={e=>addPersonality(e)} value="Is shy or nervous" /><br />
+                Is playful: <input type="checkbox" onChange={e=>addPersonality(e)} value="Is playful" /><br />
+                Is relaxed: <input type="checkbox" onChange={e=>addPersonality(e)} value="Is relaxed" /><br />
+                Is protective: <input type="checkbox" onChange={e=>addPersonality(e)} value="Is protective" /><br />
+                Is quiet: <input type="checkbox" onChange={e=>addPersonality(e)} value="Is quiet" /><br />
+                Makes some noise: <input type="checkbox" onChange={e=>addPersonality(e)} value="Makes some noise" /><br />
+                Is noisy: <input type="checkbox" onChange={e=>addPersonality(e)} value="Is noisy" /><br />
+                Is great with kids: <input type="checkbox" onChange={e=>addPersonality(e)} value="Is great with kids" /><br />
+                Is not great with kids: <input type="checkbox" onChange={e=>addPersonality(e)} value="Is not great with kids" /><br />
+                Is great with other pets: <input type="checkbox" onChange={e=>addPersonality(e)} value="Is great with other pets" /><br />
+                Is not great with other pets: <input type="checkbox" onChange={e=>addPersonality(e)} value="Is not great with other pets" /><br />
             </div>
 
             <div class="form-group">
                 <h5>
                 <p>Training</p>
                 </h5>
-                Is house trained: <input type="checkbox" name="attributes[]" value="Is house trained" /><br />
-                Has obidience training: <input type="checkbox" name="attributes[]" value="Has obidience training" /><br />
+                Is house trained: <input type="checkbox"  onChange={e=>addTraining(e)} value="Is house trained" /><br />
+                Has obidience training: <input type="checkbox"  onChange={e=>addTraining(e)} value="Has obidience training" /><br />
             </div>
 
             <div class="form-group">
                 <p>Is your pet sterilized?</p>
-                <input type="radio" name="sterilized" value="true"/> The pet is already sterilized <br/>
-                <input type="radio" name="sterilized" value="false"/> The pet is not sterilized yet <br/>
+                <input type="radio" name="sterilized" onChange={()=>setsteralized(true)}/> The pet is already sterilized <br/>
+                <input type="radio" name="sterilized" onChange={()=>setsteralized(false)}/> The pet is not sterilized yet <br/>
             </div>
 
                 <div class="form-group">
                     <p>Does the pet have any medical needs? If so, please specify:</p>
-                    <input type="radio" name="medicalNeeds" value="false"/> The pet doesn't have any medical needs<br/>
-                    <input type="radio" name="medicalNeeds" value="true"/> The pet has medical needs<br/>
+                    <input type="radio" name="medicalNeeds" onChange={()=>{setmedicalNeeds(false); setmedicalNeedsdesc("NA")}}/> The pet doesn't have any medical needs<br/>
+                    <input type="radio" name="medicalNeeds" onChange={()=>setmedicalNeeds(true)}/> The pet has medical needs<br/>
                     <br/>
-                    <input type="text" name="ifMedicalNeeds" placeholder="specify medical needs here..."/>
+                    {medicalNeeds?<input type="text" onChange={e=>setmedicalNeedsdesc(e.target.value)} name="ifMedicalNeeds" placeholder="specify medical needs here..."/> :''}
+                    
                 </div>
 
                 <button type="submit">Submit pet info</button>
