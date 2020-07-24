@@ -42,11 +42,10 @@ export default function Header() {
         <input onChange={e => setSignupEmail(e.target.value)} type='text' name='email' placeholder='Email' />
         <input onChange={e => setSignupPassword(e.target.value)} type='password' name='password' placeholder='Password' />
         <input onChange={e => setSignupConfirmPassword(e.target.value)} type='password' name='confirmPassword' placeholder='Confirm Password' />
-
-
+        <label>I am looking for: </label>
         <select onChange={e => setrole(e.target.value)} name="role">
-          <option value="Role1">Role1</option>
-          <option value="Role2">Role2</option>
+          <option value="home"> a new pet for my home</option>
+          <option value="pet"> a new home for a pet</option>
         </select>
         <button onClick={doSignUp}>Sign up</button>
       </form>

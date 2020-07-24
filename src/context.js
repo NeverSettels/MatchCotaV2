@@ -6,6 +6,7 @@ function MyProvider(props) {
 
   const auth = firebase.auth();
 
+
   const [state, setState] = useState({
     user: {},
     isLogged: false
@@ -17,7 +18,7 @@ function MyProvider(props) {
 
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
-        console.log("logged in" + user.email);
+              //console.log("logged in" + user.email);
         setState({ user, isLogged: true })
 
 
@@ -26,12 +27,6 @@ function MyProvider(props) {
       }
     });
 
-    const callthisback = (obj) => {
-      console.log(obj)
-      console.log(obj.currentUser);
-    }
-    callthisback(auth)
-    console.log(auth.currentUser);
   }, [auth])
 
 
