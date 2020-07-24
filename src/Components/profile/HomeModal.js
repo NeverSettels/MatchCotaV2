@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function PetProfile() {
+export default function HomeModal() {
     return (
         <div>
             

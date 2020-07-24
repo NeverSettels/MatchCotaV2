@@ -3,6 +3,8 @@ import { useFirestore } from 'react-redux-firebase';
 import { Redirect } from 'react-router-dom'
 // import { message } from 'antd'
 import { MyContext } from "../../context.js"
+import PetModal from './PetModal.js';
+
 
 export default function Main() {
   const context = useContext(MyContext)
@@ -33,6 +35,7 @@ useEffect(() => {
   return (
     <div>
      {context.state.isLogged?'':<Redirect to='signin'/>}
+     {role==='pet'? <PetModal/>:''}
     </div>
   )
 }
