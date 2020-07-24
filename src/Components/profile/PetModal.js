@@ -8,20 +8,22 @@ export default function PetModal() {
     const [petName, setPetName] =  useState('')
     const [petType, setPetType] =  useState('dog')
     const [otherType, setotherType] =  useState('')
-    const [age, setage] =  useState('')
+    const [age, setage] =  useState('0-1')
+    const [size, setSize] = useState('very small')
+    const [gender, setgender] = useState('female')
     const handleOk = () => {
         let tempPetType =petType;
         if(petType==='other'){
             tempPetType = otherType;
         }
-        let petObj = {location,petName, pettype:tempPetType ,age};
+        let petObj = {location,petName, pettype:tempPetType ,age, size};
         console.log(petObj)
        setvisible(false)
       };
     return (
         <>
         <Button type="primary" onClick={()=>setvisible(true)}>
-          Open Modal with customized footer
+          Add pet
         </Button>
         <Modal
           visible={visible}
@@ -95,7 +97,7 @@ export default function PetModal() {
             <div class="form-group">
                 <p>Please indicate the size of the pet</p>
                 <label for="petSize">Choose size</label>
-                <select name="petSize" id="petSize">
+                <select onChange={e=>setSize(e.target.value)} name="petSize" id="petSize">
                 <option value="very small">Very small</option>
                 <option value="small">Small</option>
                 <option value="medium">Medium</option>
@@ -105,10 +107,9 @@ export default function PetModal() {
             </div>
             <div class="form-group">
                 <label for="gender">Pet's gender</label>
-                <select name="gender" id="gender">
+                <select onChange={e=>setgender(e.target.value)}name="gender" id="gender">
                 <option value="female">Female</option>
                 <option value="male">Male</option>
-                <option value="apacheHelicopter">Apache Helicopter</option>
                 </select>
             </div>
 
