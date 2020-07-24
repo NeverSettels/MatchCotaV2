@@ -7,7 +7,8 @@ export default function SignIn() {
   const [signinEmail, setSigninEmail] = useState("")
   const [signinPassword, setSigninPassword] = useState("")
 
-  function doSignIn() {
+  function doSignIn(event) {
+    event.preventDefault();
     firebase.auth().signInWithEmailAndPassword(signinEmail, signinPassword).then(function () {
       message.success("Successfully signed in!");
     }).catch(function (error) {

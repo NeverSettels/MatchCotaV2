@@ -1,22 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-import firebase from "firebase/app";
-import { message } from 'antd';
+
 
 export default function Landing() {
   const [displaySignUp, setdisplaySignUp] = useState(false)
-
-  function tempDoSignOut() {
-    firebase.auth().signOut().then(function () {
-      message.success("Successfully signed out!");
-
-    }).catch(function (error) {
-      message.error(error.message);
-    });
-  }
+ 
   return (
     <div className="landing">
-      <button onClick={tempDoSignOut}>Temp Sign out</button>
       <div className="adoption blurb">
         <h2>Before SigningS Up</h2>
         <p> It is important to note that pet adoption is not something to do on a whim. It is a responsability you're agreeing to for the rest of the pets life. You will be their safety and calm in this world and if you are unable or unwilling to to accept this responsibility <strong>DO NOT ADOPT</strong>. Animals are living beings act accordingly. If your considering becoming a pet parent for the first time take the time to read though some of the links provided below.</p>

@@ -14,15 +14,18 @@ export default function Header() {
 
   const firestore = useFirestore()
 
-  function doSignUp() {
+  function doSignUp(event) {
+    event.preventDefault();
+    console.log("Am I here at all?")
     if (signupPassword === signupConfirmPassword) {
       firebase.auth().createUserWithEmailAndPassword(signupEmail, signupPassword).then(function (data) {
         console.log("do i get anything here=>>> ", data.user.uid)
 
         message.success("successfully signed up!");
         // how create two collections at once
-        return firestore.collection('users').add({ userId: data.user.uid, role, liked: [] })
+       return firestore.collection('users').add({ userId: data.user.uid, role, liked: [] })
       }).catch(function (error) {
+        console.log(error);
         message.error(error.message);
       });
     } else {
@@ -35,7 +38,7 @@ export default function Header() {
     <div>
 
       <h1>Sign up</h1>
-      <form >
+      <form>
         <input onChange={e => setSignupEmail(e.target.value)} type='text' name='email' placeholder='Email' />
         <input onChange={e => setSignupPassword(e.target.value)} type='password' name='password' placeholder='Password' />
         <input onChange={e => setSignupConfirmPassword(e.target.value)} type='password' name='confirmPassword' placeholder='Confirm Password' />

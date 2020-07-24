@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './Components/App';
+import App from './Components/universal/App';
 import * as serviceWorker from './serviceWorker';
 
 import { createStore } from 'redux';
@@ -11,6 +11,7 @@ import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import { createFirestoreInstance } from 'redux-firestore';
 import firebase from "./firebase";
 import 'firebase/auth';
+import MyProvider from "./context";
 
 
 const store = createStore(rootReducer);
@@ -27,9 +28,11 @@ const rrfProps = {
 
 ReactDOM.render(
   <Provider store={store}>
-    < ReactReduxFirebaseProvider {...rrfProps}>
-      <App />
-    </ReactReduxFirebaseProvider>
+    <MyProvider>
+     < ReactReduxFirebaseProvider {...rrfProps}>
+       <App />
+     </ReactReduxFirebaseProvider>
+    </MyProvider>
   </Provider>,
   document.getElementById('root')
 );
