@@ -11,15 +11,28 @@ export default function PetModal() {
     const [age, setage] =  useState('0-1')
     const [size, setSize] = useState('very small')
     const [gender, setgender] = useState('female')
+
+    const [attributes, setattributes] = useState([])
     const handleOk = () => {
         let tempPetType =petType;
         if(petType==='other'){
             tempPetType = otherType;
         }
-        let petObj = {location,petName, pettype:tempPetType ,age, size};
+        let petObj = {location,petName, pettype:tempPetType ,age, size, gender, attributes};
         console.log(petObj)
        setvisible(false)
       };
+
+    const addAttribute=(e)=>{
+          let temp = [...attributes]
+          if(e.target.checked){
+              setattributes([...temp, e.target.value])
+          }else{
+           let removeIndex = attributes.indexOf(e.target.value)
+            temp.splice(removeIndex,1)
+            setattributes([...temp])
+          }
+      }
     return (
         <>
         <Button type="primary" onClick={()=>setvisible(true)}>
@@ -118,12 +131,12 @@ export default function PetModal() {
                 <p>Here select all the attributes that best apply to the pet:</p>
                 </h4>
                 <p>Sheding and grooming</p>
-                No Sheding: <input type="checkbox" name="attributes[]" value="No Sheding" /><br />
-                Some Sheding: <input type="checkbox" name="attributes[]" value="Some Sheding" /><br />
-                Heavy Sheding: <input type="checkbox" name="attributes[]" value="Heavy Sheding" /><br />
-                No Gromming necessary: <input type="checkbox" name="attributes[]" value="No Gromming necessary" /><br />
-                Some Gromming necessary: <input type="checkbox" name="attributes[]" value="Some Gromming necessary" /><br />
-                Heavy Gromming necessary: <input type="checkbox" name="attributes[]" value="Heavy Gromming necessary" /><br />
+                No Sheding: <input type="checkbox" onChange={e=>addAttribute(e)}  name="attributes[]" value="No Sheding" /><br />
+                Some Sheding: <input type="checkbox" onChange={e=>addAttribute(e)}  name="attributes[]" value="Some Sheding" /><br />
+                Heavy Sheding: <input type="checkbox" onChange={e=>addAttribute(e)}  name="attributes[]" value="Heavy Sheding" /><br />
+                No Gromming necessary: <input type="checkbox" onChange={e=>addAttribute(e)}  name="attributes[]" value="No Gromming necessary" /><br />
+                Some Gromming necessary: <input type="checkbox" onChange={e=>addAttribute(e)}  name="attributes[]" value="Some Gromming necessary" /><br />
+                Heavy Gromming necessary: <input type="checkbox" onChange={e=>addAttribute(e)}  name="attributes[]" value="Heavy Gromming necessary" /><br />
             </div>
 
             <div class="form-group">
