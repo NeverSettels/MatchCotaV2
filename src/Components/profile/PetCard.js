@@ -46,7 +46,6 @@ useEffect(() => {
     return (
         <div key={pet.id}>
             {pet.petName}
-            {console.log(urls.length)};
             {urls.map((url, i) => <img key={i} src={url} alt={`image${i}`}/>)}
         </div>
     )
