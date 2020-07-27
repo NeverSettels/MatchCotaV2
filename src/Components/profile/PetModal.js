@@ -1,8 +1,14 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { Modal, Button } from 'antd';
+import DropZone from "./DropZone"
+import firebase from 'firebase/app';
+import {MyContext} from "../../context";
+import { useFirestore } from 'react-redux-firebase'
+
 
 
 export default function PetModal() {
+    const firestore = useFirestore()
     const [visible, setvisible] = useState(false)
     const [location, setLocation] =  useState('')
     const [petName, setPetName] =  useState('')
@@ -16,7 +22,10 @@ export default function PetModal() {
     const [training, settraining] = useState([])
     const [steralized, setsteralized] = useState(false);
     const [medicalNeeds, setmedicalNeeds] = useState(false);
-    const [medicalNeedsdesc, setmedicalNeedsdesc] = useState("NA")
+    const [medicalNeedsdesc, setmedicalNeedsdesc] = useState("NA");
+    const [images, setImages] = useState([]);
+    const [numImages, setnumImages] = useState(0);
+    const context = useContext(MyContext)
 
 
     const handleOk = () => {
@@ -24,9 +33,39 @@ export default function PetModal() {
         if(petType==='other'){
             tempPetType = otherType;
         }
-        let petObj = {location,petName, pettype:tempPetType ,age, size, gender, attributes, personality, steralized, medicalNeeds,medicalNeedsdesc};
-        console.log(petObj)
-       setvisible(false)
+        setnumImages(images.length)
+        console.log(context.state.user)
+        images.forEach((file,i)=>{
+            const metadata = {
+                contentType: file.type
+              }
+            var blob = new Blob([file], { type: file.type });
+            const storageRef = firebase.storage().ref(`src/public/${context.state.user.uid}/image${i}`);
+            const uploadTask = storageRef.put(blob, metadata);
+            uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+            function (snapshot) {
+            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload Progress: ' + progress);
+            }, function (error) {
+             console.log(error);
+            switch (error.code) {
+                case 'storage/unauthorized':
+                    console.log("User doesn't have permission to access the object");
+                    break;
+                case 'storage/canceled':
+                    console.log("User canceled the upload");
+                    break;
+                case 'storage/unknown':
+                    console.log("Unknown error occurred, inspect error.serverResponse");
+                    break;
+                default:
+                    break;
+            }
+       });
+        })
+        let petObj = {poster: context.state.user.uid, location,petName, pettype:tempPetType ,age, size, gender, attributes, personality, steralized, medicalNeeds,medicalNeedsdesc, images, numImages, likedBy:[]};
+        setvisible(false)
+        return firestore.collection('pets').add({ ...petObj })       
       };
 
     const addAttribute=(e)=>{
@@ -97,7 +136,8 @@ export default function PetModal() {
             </div>
             <div>
                 <label for="photo">Select photos</label>
-                <input type="file" name="photo" id="photo" multiple/>
+                <input type="file" onChange={e=>console.log(e.target.value)} name="photo" id="photo" multiple/>
+                <DropZone images={images} setImages={setImages}/>
             </div>
 
             <div class="form-group">

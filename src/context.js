@@ -18,7 +18,7 @@ function MyProvider(props) {
 
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
-              //console.log("logged in" + user.email);
+              console.log("logged in" + user.uid);
         setState({ user, isLogged: true })
 
 
