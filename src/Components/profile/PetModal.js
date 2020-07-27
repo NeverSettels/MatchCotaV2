@@ -4,7 +4,7 @@ import DropZone from "./DropZone"
 import firebase from 'firebase/app';
 import {MyContext} from "../../context";
 import { useFirestore } from 'react-redux-firebase'
-
+import { v4  } from 'uuid';
 
 
 export default function PetModal() {
@@ -33,14 +33,15 @@ export default function PetModal() {
         if(petType==='other'){
             tempPetType = otherType;
         }
-        setnumImages(images.length)
         console.log(context.state.user)
+        let imageId = v4()
         images.forEach((file,i)=>{
             const metadata = {
                 contentType: file.type
               }
+              setnumImages(prev=>prev++)
             var blob = new Blob([file], { type: file.type });
-            const storageRef = firebase.storage().ref(`src/public/${context.state.user.uid}/image${i}`);
+            const storageRef = firebase.storage().ref(`src/public/${context.state.user.uid}/${imageId}/image${i}`);
             const uploadTask = storageRef.put(blob, metadata);
             uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
             function (snapshot) {
@@ -63,7 +64,7 @@ export default function PetModal() {
             }
        });
         })
-       let petObj = {poster: context.state.user.uid, location,petName, pettype:tempPetType ,age, size, gender, attributes, personality, steralized, medicalNeeds,medicalNeedsdesc, numImages, likedBy:[]};
+       let petObj = {poster: context.state.user.uid, imageId, location,petName, pettype:tempPetType ,age, size, gender, attributes, personality, steralized, medicalNeeds,medicalNeedsdesc, numImages, likedBy:[]};
        console.log(petObj) 
        setvisible(false)
         return firestore.collection('pets').add(Object.assign({}, petObj))     
