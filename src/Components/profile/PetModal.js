@@ -63,9 +63,10 @@ export default function PetModal() {
             }
        });
         })
-        let petObj = {poster: context.state.user.uid, location,petName, pettype:tempPetType ,age, size, gender, attributes, personality, steralized, medicalNeeds,medicalNeedsdesc, images, numImages, likedBy:[]};
-        setvisible(false)
-        return firestore.collection('pets').add({ ...petObj })       
+       let petObj = {poster: context.state.user.uid, location,petName, pettype:tempPetType ,age, size, gender, attributes, personality, steralized, medicalNeeds,medicalNeedsdesc, numImages, likedBy:[]};
+       console.log(petObj) 
+       setvisible(false)
+        return firestore.collection('pets').add(Object.assign({}, petObj))     
       };
 
     const addAttribute=(e)=>{
@@ -135,8 +136,6 @@ export default function PetModal() {
                 </h4>
             </div>
             <div>
-                <label for="photo">Select photos</label>
-                <input type="file" onChange={e=>console.log(e.target.value)} name="photo" id="photo" multiple/>
                 <DropZone images={images} setImages={setImages}/>
             </div>
 
