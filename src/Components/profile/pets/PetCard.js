@@ -58,7 +58,7 @@ export default function PetCard(props) {
       <h2>{pet.petName}</h2>
       {pet.poster !== context.state.user.uid ? (
         <>
-          <button onClick={like}>like</button>
+          <button onClick={() => like(pet.id, pet.likedBy)}>like</button>
         </>
       ) : (
         ""
