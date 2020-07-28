@@ -43,6 +43,8 @@ export default function Matchmake(props) {
       console.log("match");
       //add to likes and to matches for me
       //add to matches for them
+    } else if (myliked.includes(id)) {
+      console.log("alreadyliked");
     } else {
       console.log("liked");
       //addToLikes for me
