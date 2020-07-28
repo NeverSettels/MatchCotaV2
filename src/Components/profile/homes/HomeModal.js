@@ -1,12 +1,13 @@
 import React, { useState, useContext } from "react";
 import { Modal, Button } from "antd";
-import DropZone from "./DropZone";
+import DropZone from "../DropZone";
 import firebase from "firebase/app";
-import { MyContext } from "../../context";
+import { MyContext } from "../../../context";
 import { useFirestore } from "react-redux-firebase";
 import { v4 } from "uuid";
 
 export default function HomeModal() {
+  const firestore = useFirestore();
   const context = useContext(MyContext);
   const [numImages, setnumImages] = useState(0);
   const [images, setImages] = useState([]);
@@ -69,6 +70,12 @@ export default function HomeModal() {
       hometype: temphometype,
       ownership,
       numImages,
+      yard,
+      numPeople,
+      children,
+      employment,
+      freehours,
+      otherpetsnum,
       likedBy: [],
     };
     console.log(homeObj);
@@ -79,7 +86,7 @@ export default function HomeModal() {
   return (
     <>
       <Button type="primary" onClick={() => setvisible(true)}>
-        Add pet
+        add home
       </Button>
       <Modal
         visible={visible}

@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { Modal, Button } from "antd";
-import DropZone from "./DropZone";
+import DropZone from "../DropZone";
 import firebase from "firebase/app";
-import { MyContext } from "../../context";
+import { MyContext } from "../../../context";
 import { useFirestore } from "react-redux-firebase";
 import { v4 } from "uuid";
 
@@ -439,13 +439,13 @@ export default function PetModal() {
               type="radio"
               name="sterilized"
               onChange={() => setsteralized(true)}
-            />{" "}
+            />
             The pet is already sterilized <br />
             <input
               type="radio"
               name="sterilized"
               onChange={() => setsteralized(false)}
-            />{" "}
+            />
             The pet is not sterilized yet <br />
           </div>
 
