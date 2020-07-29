@@ -9,10 +9,17 @@ export default function Matchmake(props) {
   let { role } = props;
   const context = useContext(MyContext);
   const firestore = useFirestore();
+  const updateLiked = (toUpdateId, idToadd, alreadyliked) => {
+    return firestore.update(
+      { collection: `users`, doc: toUpdateId },
+      { liked: [...alreadyliked, idToadd] }
+    );
+  };
   const like = (id, likedBy) => {
     console.log(likedBy);
     let myliked = [];
     let theyliked = [];
+    let myid = "";
     firestore
       .collection("users")
       .where("userId", "==", context.state.user.uid)
@@ -21,34 +28,43 @@ export default function Matchmake(props) {
         querySnapshot.forEach(function (doc) {
           console.log(doc.id, "==>", doc.data());
           myliked = doc.data().liked;
+          myid = doc.id;
+          ///
+          firestore
+            .collection("users")
+            .where("userId", "==", id)
+            .get()
+            .then(function (querySnapshot) {
+              querySnapshot.forEach(function (doc) {
+                console.log(doc.id, "==>", doc.data());
+                theyliked = doc.data().liked;
+                ///
+                if (theyliked.includes(context.state.user.uid)) {
+                  console.log("match");
+                  updateLiked(context.state.user.uid, id, myliked);
+                  //add to likes and to matches for me
+                  //add to matches for them
+                } else if (myliked.includes(id)) {
+                  console.log("alreadyliked");
+                } else {
+                  console.log("liked");
+                  console.log(myid);
+                  updateLiked(myid, id, myliked);
+                }
+
+                ///
+              });
+            })
+            .catch(function (error) {
+              console.log("Error getting documents: ", error);
+            });
+
+          ////
         });
       })
       .catch(function (error) {
         console.log("Error getting documents: ", error);
       });
-    firestore
-      .collection("users")
-      .where("userId", "==", id)
-      .get()
-      .then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          console.log(doc.id, "==>", doc.data());
-          theyliked = doc.data().liked;
-        });
-      })
-      .catch(function (error) {
-        console.log("Error getting documents: ", error);
-      });
-    if (theyliked.includes(context.state.user.uid)) {
-      console.log("match");
-      //add to likes and to matches for me
-      //add to matches for them
-    } else if (myliked.includes(id)) {
-      console.log("alreadyliked");
-    } else {
-      console.log("liked");
-      //addToLikes for me
-    }
   };
 
   useFirestoreConnect([{ collection: "pets" }]);
