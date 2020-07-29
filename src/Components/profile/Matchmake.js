@@ -15,11 +15,20 @@ export default function Matchmake(props) {
       { liked: [...alreadyliked, idToadd] }
     );
   };
+  const updateMatched = (toUpdateId, idToadd, alreadyMatched) => {
+    return firestore.update(
+      { collection: `users`, doc: toUpdateId },
+      { matched: [...alreadyMatched, idToadd] }
+    );
+  };
   const like = (id, likedBy) => {
     console.log(likedBy);
     let myliked = [];
     let theyliked = [];
     let myid = "";
+    let myMatched = [];
+    let theyMatched = [];
+    let theirId = "";
     firestore
       .collection("users")
       .where("userId", "==", context.state.user.uid)
@@ -29,38 +38,42 @@ export default function Matchmake(props) {
           console.log(doc.id, "==>", doc.data());
           myliked = doc.data().liked;
           myid = doc.id;
-          ///
-          firestore
-            .collection("users")
-            .where("userId", "==", id)
-            .get()
-            .then(function (querySnapshot) {
-              querySnapshot.forEach(function (doc) {
-                console.log(doc.id, "==>", doc.data());
-                theyliked = doc.data().liked;
-                ///
-                if (theyliked.includes(context.state.user.uid)) {
-                  console.log("match");
-                  updateLiked(context.state.user.uid, id, myliked);
-                  //add to likes and to matches for me
-                  //add to matches for them
-                } else if (myliked.includes(id)) {
-                  console.log("alreadyliked");
-                } else {
-                  console.log("liked");
-                  console.log(myid);
-                  updateLiked(myid, id, myliked);
-                }
-
-                ///
-              });
-            })
-            .catch(function (error) {
-              console.log("Error getting documents: ", error);
-            });
-
-          ////
+          myMatched = doc.data().matches;
         });
+        firestore
+          .collection("users")
+          .where("userId", "==", id)
+          .get()
+          .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+              console.log(doc.id, "==>", doc.data());
+              theyliked = doc.data().liked;
+              theyMatched = doc.data().matches;
+              theirId = doc.id;
+              ///
+            });
+            console.log(theyliked);
+            console.log(context.state.user.uid);
+            if (theyliked.includes(myid)) {
+              console.log("match");
+              updateLiked(myid, theirId, myliked);
+              updateMatched(myid, theirId, myMatched);
+              updateMatched(theirId, myid, theyMatched);
+              //add to likes and to matches for me
+              //add to matches for them
+            } else if (myliked.includes(theirId)) {
+              console.log("alreadyliked");
+            } else {
+              console.log("liked");
+              console.log(myid);
+              updateLiked(myid, theirId, myliked);
+            }
+          })
+          .catch(function (error) {
+            console.log("Error getting documents: ", error);
+
+            ////
+          });
       })
       .catch(function (error) {
         console.log("Error getting documents: ", error);

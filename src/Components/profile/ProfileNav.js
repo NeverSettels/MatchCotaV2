@@ -7,7 +7,7 @@ export default function ProfileNav(props) {
     <div>
       <button onClick={() => setView("mine")}>my {role}s</button>
       <button onClick={() => setView("matchmake")}>make some matches</button>
-      <button>see matches</button>
+      <button onClick={() => setView("matches")}>see matches</button>
     </div>
   );
 }
