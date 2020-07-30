@@ -147,7 +147,7 @@ button:hover{
   border-bottom: #6B7F82 solid 2px;
 }
 .card{
-  width: 30vw;
+  width: 25vw;
   backdrop-filter: blur(10px);
   background-color: rgba(117, 117, 117, 0.295);
   padding: 1rem;
@@ -205,7 +205,8 @@ button:hover{
   height: 100%;
 }
 .card-box{
-  width: 80vw;
+  width: 100vw;
   display: flex;
   flex-wrap: wrap ;
+  justify-content: center;
 }

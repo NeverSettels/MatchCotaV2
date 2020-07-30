@@ -3,7 +3,8 @@
 ### _By Eric Settels.  2020_
 
 ## Description
-This app will provide a space for people looking for a new pet to match with people giving up pets for adoption. 
+A site designed to help you pair up with you prefect companion and help find pets their ideal forever home!
+The name is a combination of the word match and and mascota meaning pet in Spanish! They way it works (or will work when completed) you only get to see the contact info of people you've matched with and vise-versa to allow more control in who contacts you. The founding idea being that as people looking for pets we're not always aware of what is best for said pets or what we should be looking for in a pet, this two way control helps people make more informed decisions in the commitment they are making while adopting a pet!
 
 ## Developers Note:
 **It is important to note that pet adoption is not something to do on a whim. It is a responsability you're agreeing to for the rest of the pets life. You will be their safety and calm in this world and if you are unable or unwilling to to accept this responsibility DO NOT ADOPT. Animals are living beings act accordingly**
@@ -150,8 +151,13 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 To learn React, check out the [React documentation](https://reactjs.org/).
 </details>
 
-## Known bugs
-* None Yet
+## Future Plans
+- Displaying your matches: this functionality is almost there but time waits for no one!
+- Flesh out resources tab
+- Add direct Emailing/chating to matches in app
+- Location! Only show pets in your general area!
+- Deployment! deploy it for the world to use
+- Account verification: verify accounts to make sure no one is lying
 
 ## Support 
 

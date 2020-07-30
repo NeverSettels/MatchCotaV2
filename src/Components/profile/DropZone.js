@@ -26,12 +26,14 @@ export default function DropZone(props) {
   return (
     <div id="dropbox" {...getRootProps()}>
       <input {...getInputProps()} />
-      <p>Drag 'n' drop some files here, or click to select files</p>
-      <ul>
-        {dropped.map((file) => (
-          <li>{file}</li>
-        ))}
-      </ul>
+      <p>
+        Drag 'n' drop some files here, or click to select files
+        <ul>
+          {dropped.map((file) => (
+            <li>{file}</li>
+          ))}
+        </ul>
+      </p>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useFirestore } from "react-redux-firebase";
 import { MyContext } from "../../context.js";
 import { useSelector } from "react-redux";
+import { message } from "antd";
 import { useFirestoreConnect, isLoaded } from "react-redux-firebase";
 import PetCard from "./pets/PetCard";
 
@@ -55,16 +56,16 @@ export default function Matchmake(props) {
             console.log(theyliked);
             console.log(context.state.user.uid);
             if (theyliked.includes(myid)) {
-              console.log("match");
+              message.success("Its a match!");
               updateLiked(myid, theirId, myliked);
               updateMatched(myid, theirId, myMatched);
               updateMatched(theirId, myid, theyMatched);
               //add to likes and to matches for me
               //add to matches for them
             } else if (myliked.includes(theirId)) {
-              console.log("alreadyliked");
+              message.warn("You already liked this pet!");
             } else {
-              console.log("liked");
+              message.success("liked!");
               console.log(myid);
               updateLiked(myid, theirId, myliked);
             }
