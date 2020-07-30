@@ -13,7 +13,7 @@ export default function HomeModal() {
   const [images, setImages] = useState([]);
   const [visible, setvisible] = useState(false);
   const [location, setLocation] = useState("");
-  const [hometype, sethometype] = useState("dog");
+  const [hometype, sethometype] = useState("house");
   const [ownership, setownership] = useState("rent");
   const [yard, setyard] = useState("no yard");
   const [numPeople, setNumPeople] = useState(0);
@@ -87,21 +87,22 @@ export default function HomeModal() {
     <>
       <button onClick={() => setvisible(true)}>add home</button>
       <Modal
+        className="modal"
         visible={visible}
         title="Add Home"
         onOk={handleOk}
         onCancel={() => setvisible(false)}
         footer={[
-          <Button key="back" onClick={() => setvisible(false)}>
+          <button key="back" onClick={() => setvisible(false)}>
             Return
-          </Button>,
-          <Button key="submit" type="primary" onClick={handleOk}>
+          </button>,
+          <button key="submit" type="primary" onClick={handleOk}>
             Submit
-          </Button>,
+          </button>,
         ]}
       >
-        <div class="adopterCreateForm">
-          <form>
+        <div>
+          <form className="form">
             <div>
               <section>
                 <h4>
@@ -122,10 +123,8 @@ export default function HomeModal() {
               <div>
                 <DropZone images={images} setImages={setImages} />
               </div>
-
-              <br />
             </div>
-            <div class="form-group">
+            <div>
               <p>
                 What is the general area were you currently reside such as city,
                 or neigborhood;
@@ -139,7 +138,7 @@ export default function HomeModal() {
                 placeholder="state/city/neighbourhood"
               />
             </div>
-            <div class="form-group">
+            <div>
               <p>In what type of residence do you currently live?</p>
               <label for="typeHome">Choose home type</label>
               <select
@@ -151,7 +150,7 @@ export default function HomeModal() {
                 <option value="apartment">I live in an apartment</option>
               </select>
             </div>
-            <div class="form-group">
+            <div>
               <label for="propertyType">Choose property type</label>
               <select
                 onChange={(e) => setownership(e.target.value)}
@@ -161,7 +160,7 @@ export default function HomeModal() {
                 <option value="own">I own</option>
               </select>
             </div>
-            <div class="form-group">
+            <div>
               <p>Please indicate the size of you yard</p>
               <label for="yard">Choose yard size</label>
               <select
@@ -181,7 +180,7 @@ export default function HomeModal() {
                 </option>
               </select>
             </div>
-            <div class="form-group">
+            <div>
               <p>How many people other than youself live in this home?</p>
               <label for="peopleAtHome"></label>
               <input
@@ -190,7 +189,7 @@ export default function HomeModal() {
                 placeholder="Number of people"
               />
             </div>
-            <div class="form-group">
+            <div>
               <p>
                 If any of these are children, what is the age of the youngest?
               </p>
@@ -205,7 +204,7 @@ export default function HomeModal() {
                 <option value="teen">13 and up</option>
               </select>
             </div>
-            <div class="form-group">
+            <div>
               <p>What is you current state of employment?</p>
               <select
                 onChange={(e) => setEmployment(e.target.value)}
@@ -220,12 +219,11 @@ export default function HomeModal() {
                 <option value="student">I'm currently a Student</option>
               </select>
             </div>
-            <div class="form-group">
+            <div>
               <p>
                 Aproximately how many hours a week are the members of your
-                household at home? <br />
-                ex: Someone who works full time (40 hours a week) spends 128
-                hours at home
+                household at home? ex: Someone who works full time (40 hours a
+                week) spends 128 hours at home
               </p>
               <label for="freeHoursPerWeek"></label>
               <input
@@ -236,15 +234,14 @@ export default function HomeModal() {
                 placeholder="Number of hours"
               />
             </div>
-            <div class="form-group">
+            <div>
               <p>Is this your first time owning a pet?</p>
               <input type="radio" name="firstPet" value="true" /> This is my
               first pet
-              <br />
               <input type="radio" name="firstPet" value="false" /> I have taken
-              care of animals before <br />
+              care of animals before
             </div>
-            <div class="form-group">
+            <div>
               <p>Do you own any other pets?</p>
               <input
                 type="radio"
@@ -253,14 +250,13 @@ export default function HomeModal() {
                 value="true"
               />
               Yes, I have other pets
-              <br />
               <input
                 type="radio"
                 onChange={() => setotherPets(false)}
                 name="otherPets"
                 value="false"
               />
-              No, I don't have other pets <br />
+              No, I don't have other pets
             </div>
             {otherPets ? (
               <div>
@@ -277,8 +273,6 @@ export default function HomeModal() {
             ) : (
               ""
             )}
-            <br />
-            <button type="submit">Save</button>
           </form>
         </div>
       </Modal>

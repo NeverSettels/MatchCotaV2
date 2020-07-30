@@ -6,6 +6,7 @@ import { MyContext } from "../../context.js";
 import PetModal from "./pets/PetModal.js";
 import PetDisplay from "./pets/PetDisplay";
 import HomeModal from "./homes/HomeModal.js";
+import HomeDisplay from "./homes/HomeDisplay.js";
 import Matchmake from "./Matchmake.js";
 import ProfileNav from "./ProfileNav.js";
 
@@ -14,6 +15,7 @@ export default function Main() {
   const firestore = useFirestore();
   const [role, setrole] = useState();
   const [pets, setpets] = useState([]);
+  const [homes, sethomes] = useState([]);
   const [view, setView] = useState("mine");
 
   const getRole = () => {
@@ -51,6 +53,21 @@ export default function Main() {
         .catch(function (error) {
           console.log("Error getting documents: ", error);
         });
+      firestore
+        .collection("homes")
+        .where("poster", "==", context.state.user.uid)
+        .get()
+        .then(function (querySnapshot) {
+          let temp = [...homes];
+          querySnapshot.forEach(function (doc) {
+            temp = [...temp, { ...doc.data(), id: doc.id }];
+            console.log(doc.id, "==>", doc.data());
+          });
+          sethomes(temp);
+        })
+        .catch(function (error) {
+          console.log("Error getting documents: ", error);
+        });
     }
   }, [context.state.user.uid]);
 
@@ -62,7 +79,11 @@ export default function Main() {
         {view === "mine" ? (
           <>
             {role === "pet" ? <PetModal /> : <HomeModal />}
-            {role === "pet" ? <PetDisplay pets={pets} /> : ""}
+            {role === "pet" ? (
+              <PetDisplay pets={pets} />
+            ) : (
+              <HomeDisplay homes={homes} />
+            )}
           </>
         ) : (
           ""

@@ -126,17 +126,18 @@ export default function PetModal() {
     <>
       <button onClick={() => setvisible(true)}>Add pet</button>
       <Modal
+        className="modal"
         visible={visible}
         title="Add pet"
         onOk={handleOk}
         onCancel={() => setvisible(false)}
         footer={[
-          <Button key="back" onClick={() => setvisible(false)}>
+          <button key="back" onClick={() => setvisible(false)}>
             Return
-          </Button>,
-          <Button key="submit" type="primary" onClick={handleOk}>
+          </button>,
+          <button key="submit" type="primary" onClick={handleOk}>
             Submit
-          </Button>,
+          </button>,
         ]}
       >
         <form>
@@ -164,7 +165,7 @@ export default function PetModal() {
             <DropZone images={images} setImages={setImages} />
           </div>
 
-          <div class="form-group">
+          <div>
             <p>
               What is the general area where you reside such as city, or
               neigborhood{" "}
@@ -179,7 +180,7 @@ export default function PetModal() {
             />
           </div>
 
-          <div class="form-group">
+          <div>
             <p>Whats the little guy's name</p>
             <label for="petName">Name:</label>
             <input
@@ -189,7 +190,7 @@ export default function PetModal() {
             />
           </div>
 
-          <div class="form-group">
+          <div>
             <p>What kind of pet do you have for an adopter?</p>
             <label for="petType">Choose pet type</label>
             <select
@@ -211,7 +212,7 @@ export default function PetModal() {
               ""
             )}
           </div>
-          <div class="form-group">
+          <div>
             <p>Please specify the age of the pet</p>
             <label for="age">Choose age</label>
             <select
@@ -225,7 +226,7 @@ export default function PetModal() {
               <option value="8+">More than 8 years</option>
             </select>
           </div>
-          <div class="form-group">
+          <div>
             <p>Please indicate the size of the pet</p>
             <label for="petSize">Choose size</label>
             <select
@@ -240,7 +241,7 @@ export default function PetModal() {
               <option value="huge">HUGE</option>
             </select>
           </div>
-          <div class="form-group">
+          <div>
             <label for="gender">Pet's gender</label>
             <select
               onChange={(e) => setgender(e.target.value)}
@@ -252,186 +253,208 @@ export default function PetModal() {
             </select>
           </div>
 
-          <div class="form-group">
+          <div>
             <h4>
               <p>Here select all the attributes that best apply to the pet:</p>
             </h4>
             <p>Sheding and grooming</p>
-            No Sheding:{" "}
-            <input
-              type="checkbox"
-              onChange={(e) => addAttribute(e)}
-              name="attributes[]"
-              value="No Sheding"
-            />
-            <br />
-            Some Sheding:{" "}
-            <input
-              type="checkbox"
-              onChange={(e) => addAttribute(e)}
-              name="attributes[]"
-              value="Some Sheding"
-            />
-            <br />
-            Heavy Sheding:{" "}
-            <input
-              type="checkbox"
-              onChange={(e) => addAttribute(e)}
-              name="attributes[]"
-              value="Heavy Sheding"
-            />
-            <br />
-            No Gromming necessary:{" "}
-            <input
-              type="checkbox"
-              onChange={(e) => addAttribute(e)}
-              name="attributes[]"
-              value="No Gromming necessary"
-            />
-            <br />
-            Some Gromming necessary:{" "}
-            <input
-              type="checkbox"
-              onChange={(e) => addAttribute(e)}
-              name="attributes[]"
-              value="Some Gromming necessary"
-            />
-            <br />
-            Heavy Gromming necessary:{" "}
-            <input
-              type="checkbox"
-              onChange={(e) => addAttribute(e)}
-              name="attributes[]"
-              value="Heavy Gromming necessary"
-            />
-            <br />
+            <div className="check-group">
+              No Sheding:{" "}
+              <input
+                type="checkbox"
+                onChange={(e) => addAttribute(e)}
+                name="attributes[]"
+                value="No Sheding"
+              />
+            </div>
+            <div className="check-group">
+              Some Sheding:{" "}
+              <input
+                type="checkbox"
+                onChange={(e) => addAttribute(e)}
+                name="attributes[]"
+                value="Some Sheding"
+              />
+            </div>
+            <div className="check-group">
+              Heavy Sheding:{" "}
+              <input
+                type="checkbox"
+                onChange={(e) => addAttribute(e)}
+                name="attributes[]"
+                value="Heavy Sheding"
+              />
+            </div>
+            <div className="check-group">
+              No Gromming necessary:{" "}
+              <input
+                type="checkbox"
+                onChange={(e) => addAttribute(e)}
+                name="attributes[]"
+                value="No Gromming necessary"
+              />
+            </div>
+            <div className="check-group">
+              Some Gromming necessary:{" "}
+              <input
+                type="checkbox"
+                onChange={(e) => addAttribute(e)}
+                name="attributes[]"
+                value="Some Gromming necessary"
+              />
+            </div>
+            <div className="check-group">
+              Heavy Gromming necessary:{" "}
+              <input
+                type="checkbox"
+                onChange={(e) => addAttribute(e)}
+                name="attributes[]"
+                value="Heavy Gromming necessary"
+              />
+            </div>
           </div>
 
-          <div class="form-group">
+          <div>
             <h5>
               <p>Personality</p>
             </h5>
-            Needs lots of attention:{" "}
-            <input
-              type="checkbox"
-              onChange={(e) => addPersonality(e)}
-              value="Needs lots of attention"
-            />
-            <br />
-            Is independent:{" "}
-            <input
-              type="checkbox"
-              onChange={(e) => addPersonality(e)}
-              value="Is independent"
-            />
-            <br />
-            Is confident:{" "}
-            <input
-              type="checkbox"
-              onChange={(e) => addPersonality(e)}
-              value="Is confident"
-            />
-            <br />
-            Is shy or nervous:{" "}
-            <input
-              type="checkbox"
-              onChange={(e) => addPersonality(e)}
-              value="Is shy or nervous"
-            />
-            <br />
-            Is playful:{" "}
-            <input
-              type="checkbox"
-              onChange={(e) => addPersonality(e)}
-              value="Is playful"
-            />
-            <br />
-            Is relaxed:{" "}
-            <input
-              type="checkbox"
-              onChange={(e) => addPersonality(e)}
-              value="Is relaxed"
-            />
-            <br />
-            Is protective:{" "}
-            <input
-              type="checkbox"
-              onChange={(e) => addPersonality(e)}
-              value="Is protective"
-            />
-            <br />
-            Is quiet:{" "}
-            <input
-              type="checkbox"
-              onChange={(e) => addPersonality(e)}
-              value="Is quiet"
-            />
-            <br />
-            Makes some noise:{" "}
-            <input
-              type="checkbox"
-              onChange={(e) => addPersonality(e)}
-              value="Makes some noise"
-            />
-            <br />
-            Is noisy:{" "}
-            <input
-              type="checkbox"
-              onChange={(e) => addPersonality(e)}
-              value="Is noisy"
-            />
-            <br />
-            Is great with kids:{" "}
-            <input
-              type="checkbox"
-              onChange={(e) => addPersonality(e)}
-              value="Is great with kids"
-            />
-            <br />
-            Is not great with kids:{" "}
-            <input
-              type="checkbox"
-              onChange={(e) => addPersonality(e)}
-              value="Is not great with kids"
-            />
-            <br />
-            Is great with other pets:{" "}
-            <input
-              type="checkbox"
-              onChange={(e) => addPersonality(e)}
-              value="Is great with other pets"
-            />
-            <br />
-            Is not great with other pets:{" "}
-            <input
-              type="checkbox"
-              onChange={(e) => addPersonality(e)}
-              value="Is not great with other pets"
-            />
-            <br />
+            <div className="check-group">
+              Needs lots of attention:{" "}
+              <input
+                type="checkbox"
+                onChange={(e) => addPersonality(e)}
+                value="Needs lots of attention"
+              />
+            </div>
+            <div className="check-group">
+              Is independent:{" "}
+              <input
+                type="checkbox"
+                onChange={(e) => addPersonality(e)}
+                value="Is independent"
+              />
+            </div>
+            <div className="check-group">
+              Is confident:{" "}
+              <input
+                type="checkbox"
+                onChange={(e) => addPersonality(e)}
+                value="Is confident"
+              />
+            </div>
+            <div className="check-group">
+              Is shy or nervous:{" "}
+              <input
+                type="checkbox"
+                onChange={(e) => addPersonality(e)}
+                value="Is shy or nervous"
+              />
+            </div>
+            <div className="check-group">
+              Is playful:{" "}
+              <input
+                type="checkbox"
+                onChange={(e) => addPersonality(e)}
+                value="Is playful"
+              />
+            </div>
+            <div className="check-group">
+              Is relaxed:{" "}
+              <input
+                type="checkbox"
+                onChange={(e) => addPersonality(e)}
+                value="Is relaxed"
+              />
+            </div>
+            <div className="check-group">
+              Is protective:{" "}
+              <input
+                type="checkbox"
+                onChange={(e) => addPersonality(e)}
+                value="Is protective"
+              />
+            </div>
+            <div className="check-group">
+              Is quiet:{" "}
+              <input
+                type="checkbox"
+                onChange={(e) => addPersonality(e)}
+                value="Is quiet"
+              />
+            </div>
+            <div className="check-group">
+              Makes some noise:{" "}
+              <input
+                type="checkbox"
+                onChange={(e) => addPersonality(e)}
+                value="Makes some noise"
+              />
+            </div>
+            <div className="check-group">
+              Is noisy:{" "}
+              <input
+                type="checkbox"
+                onChange={(e) => addPersonality(e)}
+                value="Is noisy"
+              />
+            </div>
+            <div className="check-group">
+              Is great with kids:{" "}
+              <input
+                type="checkbox"
+                onChange={(e) => addPersonality(e)}
+                value="Is great with kids"
+              />
+            </div>
+            <div className="check-group">
+              Is not great with kids:{" "}
+              <input
+                type="checkbox"
+                onChange={(e) => addPersonality(e)}
+                value="Is not great with kids"
+              />
+            </div>
+            <div className="check-group">
+              Is great with other pets:{" "}
+              <input
+                type="checkbox"
+                onChange={(e) => addPersonality(e)}
+                value="Is great with other pets"
+              />
+            </div>
+            <div className="check-group">
+              Is not great with other pets:{" "}
+              <input
+                type="checkbox"
+                onChange={(e) => addPersonality(e)}
+                value="Is not great with other pets"
+              />
+            </div>
           </div>
 
-          <div class="form-group">
+          <div>
             <h5>
               <p>Training</p>
             </h5>
-            Is house trained:{" "}
-            <input
-              type="checkbox"
-              onChange={(e) => addTraining(e)}
-              value="Is house trained"
-            />
-            <br />
-            Has obidience training:{" "}
-            <input
-              type="checkbox"
-              onChange={(e) => addTraining(e)}
-              value="Has obidience training"
-            />
-            <br />
+            <div className="check-group">
+              Is house trained:{" "}
+              <input
+                type="checkbox"
+                onChange={(e) => addTraining(e)}
+                value="Is house trained"
+              />
+            </div>
+            <div className="check-group">
+              Has obidience training:{" "}
+              <input
+                type="checkbox"
+                onChange={(e) => addTraining(e)}
+                value="Has obidience training"
+              />
+            </div>
           </div>
 
-          <div class="form-group">
+          <div>
             <p>Is your pet sterilized?</p>
             <input
               type="radio"
@@ -447,7 +470,7 @@ export default function PetModal() {
             The pet is not sterilized yet <br />
           </div>
 
-          <div class="form-group">
+          <div>
             <p>Does the pet have any medical needs? If so, please specify:</p>
             <input
               type="radio"
@@ -458,15 +481,12 @@ export default function PetModal() {
               }}
             />{" "}
             The pet doesn't have any medical needs
-            <br />
             <input
               type="radio"
               name="medicalNeeds"
               onChange={() => setmedicalNeeds(true)}
             />{" "}
             The pet has medical needs
-            <br />
-            <br />
             {medicalNeeds ? (
               <input
                 type="text"
@@ -478,8 +498,6 @@ export default function PetModal() {
               ""
             )}
           </div>
-
-          <button type="submit">Submit pet info</button>
         </form>
       </Modal>
     </>

@@ -87,11 +87,13 @@ export default function Matchmake(props) {
   const homes = useSelector((state) => state.firestore.ordered.homes);
   if (isLoaded(pets) && isLoaded(homes)) {
     return (
-      <div>
-        <h1>my Matchmake</h1>
-        {role === "home"
-          ? pets.map((pet) => <PetCard like={like} pet={pet} />)
-          : ""}
+      <div className="match-make">
+        <h1>Make Some Matches!</h1>
+        <div className="card-box">
+          {role === "home"
+            ? pets.map((pet) => <PetCard like={like} pet={pet} />)
+            : ""}
+        </div>
       </div>
     );
   } else {
