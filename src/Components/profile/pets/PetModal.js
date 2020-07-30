@@ -124,9 +124,7 @@ export default function PetModal() {
   };
   return (
     <>
-      <Button type="primary" onClick={() => setvisible(true)}>
-        Add pet
-      </Button>
+      <button onClick={() => setvisible(true)}>Add pet</button>
       <Modal
         visible={visible}
         title="Add pet"

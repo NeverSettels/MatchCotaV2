@@ -38,9 +38,9 @@ export default function Header() {
   }
 
   return (
-    <div>
-      <h1>Sign up</h1>
-      <form>
+    <div className="landing">
+      <form className="adoption-blurb form">
+        <h1>Sign up</h1>
         <input
           onChange={(e) => setSignupEmail(e.target.value)}
           type="text"

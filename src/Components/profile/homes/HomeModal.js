@@ -85,9 +85,7 @@ export default function HomeModal() {
 
   return (
     <>
-      <Button type="primary" onClick={() => setvisible(true)}>
-        add home
-      </Button>
+      <button onClick={() => setvisible(true)}>add home</button>
       <Modal
         visible={visible}
         title="Add Home"

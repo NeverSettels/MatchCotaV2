@@ -55,18 +55,20 @@ export default function Main() {
   }, [context.state.user.uid]);
 
   return (
-    <div>
+    <>
       <ProfileNav view={view} role={role} setView={setView} />
-      {context.state.isLogged ? "" : <Redirect to="signin" />}
-      {view === "mine" ? (
-        <>
-          {role === "pet" ? <PetModal /> : <HomeModal />}
-          {role === "pet" ? <PetDisplay pets={pets} /> : ""}
-        </>
-      ) : (
-        ""
-      )}
-      {view === "matchmake" ? <Matchmake role={role} /> : ""}
-    </div>
+      <div className="landing">
+        {context.state.isLogged ? "" : <Redirect to="signin" />}
+        {view === "mine" ? (
+          <>
+            {role === "pet" ? <PetModal /> : <HomeModal />}
+            {role === "pet" ? <PetDisplay pets={pets} /> : ""}
+          </>
+        ) : (
+          ""
+        )}
+        {view === "matchmake" ? <Matchmake role={role} /> : ""}
+      </div>
+    </>
   );
 }

@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { MyContext } from "../../../context";
 import firebase from "firebase/app";
-import { Carousel } from "antd";
+import { Carousel, Collapse } from "antd";
+
+const { Panel } = Collapse;
 export default function PetCard(props) {
   const [urls, seturls] = useState([]);
   const context = useContext(MyContext);
@@ -49,20 +51,54 @@ export default function PetCard(props) {
   }, []);
 
   return (
-    <div key={pet.id}>
+    <div className="card" key={pet.id}>
       <Carousel autoplay>
         {urls.map((url, i) => (
           <img key={i} src={url} alt={`image${i}`} />
         ))}
       </Carousel>
-      <h2>{pet.petName}</h2>
-      {pet.poster !== context.state.user.uid ? (
-        <>
-          <button onClick={() => like(pet.poster, pet.likedBy)}>like</button>
-        </>
-      ) : (
-        ""
-      )}
+      <div>
+        <h3>
+          Hi! I'm {pet.petName}, I'm a {pet.pettype} and I'm {pet.age} years
+          old!
+        </h3>
+        <Collapse accordion>
+          <Panel header="My personality" key="1">
+            <ul>
+              {pet.personality.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </Panel>
+          <Panel header="More about me" key="2">
+            <p>I'm {pet.size}</p>
+            <p>
+              {pet.steralized
+                ? "I've been steralized"
+                : " I haven't been steralized"}
+            </p>
+            <p>
+              {pet.medicalNeeds
+                ? ` I have special medical needs: ${pet.medicalNeedsdesc}`
+                : " I don't have special medical needs"}
+            </p>
+            <p>More about me!</p>
+            <ul>
+              {pet.attributes.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </Panel>
+        </Collapse>
+        ,
+        {pet.poster !== context.state.user.uid ? (
+          <>
+            <button onClick={() => like(pet.poster, pet.likedBy)}>like</button>
+          </>
+        ) : (
+          ""
+        )}
+      </div>
     </div>
   );
 }
